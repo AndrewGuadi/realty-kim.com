@@ -51,6 +51,13 @@
             --accent: #f6ad55;
         }
 
+        html,
+        body {
+            width: 100vw;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
@@ -95,12 +102,17 @@
             }
         }
 
-        .card-flip {
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
+        .flip-container {
+            perspective: 1000px;
         }
 
-        .card-flip:hover {
+        .card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            transform-origin: center center;
+        }
+
+        .flip-container:hover .card-inner {
             transform: rotateY(180deg);
         }
 
@@ -116,7 +128,9 @@
 
         .card-back {
             transform: rotateY(180deg);
+            pointer-events: none;
         }
+
 
         .glass-morphism {
             background: rgba(255, 255, 255, 0.2);
@@ -177,9 +191,7 @@
     <!-- Header/Hero Section -->
     <header class="relative h-screen w-full overflow-hidden">
         <video autoplay muted loop class="hero-video">
-            <source
-                src="https://assets.mixkit.co/videos/preview/mixkit-river-surrounded-by-forest-in-the-sunset-1866-large.mp4"
-                type="video/mp4">
+            <source src="https://assets.mixkit.co/videos/12879/12879-720.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay absolute inset-0"></div>
 
@@ -272,32 +284,37 @@
     <!-- Service Trio Cards -->
     <section id="services" class="py-16 md:py-24 bg-gray-100">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">How I Can Help You</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">
+                How I Can Help You
+            </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
                 <!-- Buyer Card -->
-                <div class="relative h-96 perspective-1000">
-                    <div class="card-flip h-full w-full rounded-2xl shadow-lg bg-white">
+                <div class="relative h-96 flip-container">
+                    <div class="card-inner relative w-full h-full rounded-2xl shadow-lg bg-white">
                         <div class="card-front p-6 flex flex-col items-center text-center">
                             <div class="text-blue-900 text-5xl mb-6">
                                 <i class="fas fa-home"></i>
                             </div>
                             <h3 class="text-2xl font-bold text-gray-800 mb-4">Home Buyers</h3>
                             <p class="text-gray-600">
-                                From first-time buyers to luxury properties, I'll guide you through every step to find
+                                From first-time buyers to luxury properties, I’ll guide you through every step to find
                                 your perfect Central PA home.
                             </p>
                             <div class="mt-auto w-full">
                                 <div class="text-xs text-gray-500 mt-4">Hover or tap to learn more</div>
                             </div>
                         </div>
+
                         <div class="card-back p-6 bg-blue-900 text-white rounded-2xl">
                             <h3 class="text-2xl font-bold mb-4">Buyer FAQs</h3>
                             <div class="mb-4">
                                 <details>
                                     <summary class="font-semibold cursor-pointer">How do I get pre-approved?</summary>
-                                    <p class="mt-2 text-sm">I work with trusted lenders who can quickly assess your
-                                        financial situation and provide a pre-approval letter, strengthening your offer.
+                                    <p class="mt-2 text-sm">
+                                        I work with trusted lenders who can quickly assess your financial situation and
+                                        provide a pre-approval letter, strengthening your offer.
                                     </p>
                                 </details>
                             </div>
@@ -305,8 +322,10 @@
                                 <details>
                                     <summary class="font-semibold cursor-pointer">What neighborhoods fit my budget?
                                     </summary>
-                                    <p class="mt-2 text-sm">Based on your criteria, I'll show you areas that match your
-                                        lifestyle and financial goals.</p>
+                                    <p class="mt-2 text-sm">
+                                        Based on your criteria, I’ll show you areas that match your lifestyle and
+                                        financial goals.
+                                    </p>
                                 </details>
                             </div>
                             <button
@@ -318,8 +337,8 @@
                 </div>
 
                 <!-- Seller Card -->
-                <div class="relative h-96 perspective-1000">
-                    <div class="card-flip h-full w-full rounded-2xl shadow-lg bg-white">
+                <div class="relative h-96 flip-container">
+                    <div class="card-inner relative w-full h-full rounded-2xl shadow-lg bg-white">
                         <div class="card-front p-6 flex flex-col items-center text-center">
                             <div class="text-blue-900 text-5xl mb-6">
                                 <i class="fas fa-sign"></i>
@@ -333,20 +352,25 @@
                                 <div class="text-xs text-gray-500 mt-4">Hover or tap to learn more</div>
                             </div>
                         </div>
+
                         <div class="card-back p-6 bg-blue-900 text-white rounded-2xl">
                             <h3 class="text-2xl font-bold mb-4">Seller FAQs</h3>
                             <div class="mb-4">
                                 <details>
                                     <summary class="font-semibold cursor-pointer">What's my home worth?</summary>
-                                    <p class="mt-2 text-sm">I provide a detailed comparative market analysis to
-                                        determine the optimal listing price.</p>
+                                    <p class="mt-2 text-sm">
+                                        I provide a detailed comparative market analysis to determine the optimal
+                                        listing price.
+                                    </p>
                                 </details>
                             </div>
                             <div>
                                 <details>
                                     <summary class="font-semibold cursor-pointer">How can I prepare my home?</summary>
-                                    <p class="mt-2 text-sm">I'll advise on cost-effective improvements that yield the
-                                        highest return on investment.</p>
+                                    <p class="mt-2 text-sm">
+                                        I'll advise on cost-effective improvements that yield the highest return on
+                                        investment.
+                                    </p>
                                 </details>
                             </div>
                             <button
@@ -358,36 +382,41 @@
                 </div>
 
                 <!-- Relocation Card -->
-                <div class="relative h-96 perspective-1000">
-                    <div class="card-flip h-full w-full rounded-2xl shadow-lg bg-white">
+                <div class="relative h-96 flip-container">
+                    <div class="card-inner relative w-full h-full rounded-2xl shadow-lg bg-white">
                         <div class="card-front p-6 flex flex-col items-center text-center">
                             <div class="text-blue-900 text-5xl mb-6">
                                 <i class="fas fa-truck-moving"></i>
                             </div>
                             <h3 class="text-2xl font-bold text-gray-800 mb-4">Relocation</h3>
                             <p class="text-gray-600">
-                                Moving to Central PA? I'll help you navigate the area and find the perfect community for
+                                Moving to Central PA? I’ll help you navigate the area and find the perfect community for
                                 your needs.
                             </p>
                             <div class="mt-auto w-full">
                                 <div class="text-xs text-gray-500 mt-4">Hover or tap to learn more</div>
                             </div>
                         </div>
+
                         <div class="card-back p-6 bg-blue-900 text-white rounded-2xl">
                             <h3 class="text-2xl font-bold mb-4">Relocation FAQs</h3>
                             <div class="mb-4">
                                 <details>
                                     <summary class="font-semibold cursor-pointer">What are the best school districts?
                                     </summary>
-                                    <p class="mt-2 text-sm">I'll match you with neighborhoods that have schools meeting
-                                        your family's educational priorities.</p>
+                                    <p class="mt-2 text-sm">
+                                        I'll match you with neighborhoods that have schools meeting your family's
+                                        educational priorities.
+                                    </p>
                                 </details>
                             </div>
                             <div>
                                 <details>
-                                    <summary class="font-semibold	cursor-pointer">What's the commute like?</summary>
-                                    <p class="mt-2 text-sm">Based on your workplace, I'll show you areas with convenient
-                                        transportation options.</p>
+                                    <summary class="font-semibold cursor-pointer">What's the commute like?</summary>
+                                    <p class="mt-2 text-sm">
+                                        Based on your workplace, I'll show you areas with convenient transportation
+                                        options.
+                                    </p>
                                 </details>
                             </div>
                             <button
@@ -397,6 +426,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -425,7 +455,7 @@
 
             <div class="relative">
                 <div class="overflow-x-auto scroll-snap whitespace-nowrap pb-8 -mx-6 px-6">
-                    <div class="inline-flex space-x-6">
+                    <div class="flex justify-center space-x-6">
                         <!-- Listing 1 -->
                         <div class="w-72 bg-white rounded-xl shadow-md overflow-hidden inline-block">
                             <div class="h-48 bg-gray-300 relative">
@@ -594,8 +624,9 @@
         <div class="container mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">What My Clients Say</h2>
 
-            <div class="relative overflow-hidden">
-                <div id="testimonial-scroll" class="flex space-x-8 py-4">
+            <div class="flex justify-center">
+                <div id="testimonial-scroll" class="flex justify-center space-x-8 py-4 w-full">
+
                     <!-- Testimonial 1 -->
                     <div class="flex-shrink-0 w-64 flex flex-col items-center">
                         <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden">
@@ -770,8 +801,13 @@
 
                     <div
                         class="mt-6 relative h-24 w-full bg-gray-800 rounded-lg overflow-hidden hover:scale-105 transition-transform">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2895.098670705553!2d-76.79666282399337!3d40.32823947145389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c8b85affe86717%3A0xdb669406e6ea3ded!2s530%20N%20Lockwillow%20Ave%2C%20Harrisburg%2C%20PA%2017112!5e1!3m2!1sen!2sus!4v1750806607541!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-<a href="https://www.google.com/maps/dir/?api=1&destination=530+N+Lockwillow+Ave,+Harrisburg,+PA+17112" target="_blank" rel="noopener" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2895.098670705553!2d-76.79666282399337!3d40.32823947145389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c8b85affe86717%3A0xdb669406e6ea3ded!2s530%20N%20Lockwillow%20Ave%2C%20Harrisburg%2C%20PA%2017112!5e1!3m2!1sen!2sus!4v1750806607541!5m2!1sen!2sus"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=530+N+Lockwillow+Ave,+Harrisburg,+PA+17112"
+                            target="_blank" rel="noopener"
+                            class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
                             <span class="bg-white text-gray-800 px-3 py-1 rounded-full text-sm font-semibold">Get
                                 Directions</span>
                         </a>
@@ -780,7 +816,8 @@
             </div>
 
             <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2023 Kim Hivner Real Estate. All rights reserved.</p>
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Kim Hivner | Real Estate Agent | Keller Williams.
+                    All rights reserved.</p>
                 <button onclick="scrollToTop()"
                     class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-full transition-colors">
                     <i class="fas fa-arrow-up mr-2"></i> Back to Top
