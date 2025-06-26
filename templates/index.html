@@ -489,6 +489,40 @@
         </div>
     </section>
 
+    {# templates/_past_listings.html #}
+<section id="past-listings" class="py-16 bg-white">
+  <div class="container mx-auto px-6">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8">Past Listings</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      {% for listing in listings %}
+      <a href="{{ listing.url }}" target="_blank" rel="noopener"
+         class="block bg-gray-50 rounded-lg shadow hover:shadow-md transition">
+        <img src="{{ listing.image_url }}" alt="{{ listing.address }}"
+             class="w-full h-48 object-cover rounded-t-lg">
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-800">{{ listing.address }}</h3>
+          <p class="text-gray-600 text-sm">
+            {{ listing.beds }} bd | {{ listing.baths }} ba | {{ listing.sqft }} sqft
+          </p>
+          <p class="mt-2 text-gray-800 font-bold">
+            ${{ "{:,.0f}".format(listing.price|int) }}
+          </p>
+          <p class="text-gray-500 text-xs">Sold {{ listing.date }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-12">
+      <a href="https://www.zillow.com/profile/kimhivner"
+         target="_blank" rel="noopener"
+         class="inline-block bg-blue-700 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-800 transition">
+        View All Past Listings on Zillow
+      </a>
+    </div>
+  </div>
+</section>
+
+
     <!-- Mortgage Calculator Modal -->
     <div id="mortgage-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
